@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
-import Globe from 'react-globe.gl';
+
+import Globe from 'components/globe';
 
 
 class EarthPage extends PureComponent {
   render() {
     return (
       <div className="l-page">
-        <Globe
-          globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-        />
+        <Globe />
       </div>
     );
   }
