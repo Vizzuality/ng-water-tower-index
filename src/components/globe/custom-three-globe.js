@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Geometry, Line, LineBasicMaterial, ParticleSystem, ParticleSystemMaterial, Vector3, AdditiveBlending, BackSide, Color, Mesh, MeshPhongMaterial, Object3D, ShaderMaterial, SphereGeometry, TextureLoader, CylinderGeometry, CylinderBufferGeometry, FaceColors, Matrix4, MeshBasicMaterial, MeshLambertMaterial, BufferGeometry, CubicBezierCurve3, Curve, Float32BufferAttribute, QuadraticBezierCurve3, TubeBufferGeometry, DoubleSide, Group, Font, CircleBufferGeometry, TextBufferGeometry } from 'three';
 import Kapsule from 'kapsule';
 import TWEEN from '@tweenjs/tween.js';
@@ -348,15 +349,15 @@ function drawThreeGeo(json, radius, shape, materalOptions, container) {
   //interpolated coordinates. Otherwise, lines go through the sphere instead of wrapping around.
 
   for (var geom_num = 0; geom_num < json_geom.length; geom_num++) {
-    if (json_geom[geom_num].type == 'Point') {
+    if (json_geom[geom_num].type === 'Point') {
       convertCoordinates(json_geom[geom_num].coordinates, radius);
       drawParticle(x_values[0], y_values[0], z_values[0], materalOptions);
-    } else if (json_geom[geom_num].type == 'MultiPoint') {
+    } else if (json_geom[geom_num].type === 'MultiPoint') {
       for (var point_num = 0; point_num < json_geom[geom_num].coordinates.length; point_num++) {
         convertCoordinates(json_geom[geom_num].coordinates[point_num], radius);
         drawParticle(x_values[0], y_values[0], z_values[0], materalOptions);
       }
-    } else if (json_geom[geom_num].type == 'LineString') {
+    } else if (json_geom[geom_num].type === 'LineString') {
       coordinate_array = createCoordinateArray(json_geom[geom_num].coordinates);
 
       for (var point_num = 0; point_num < coordinate_array.length; point_num++) {
@@ -364,7 +365,7 @@ function drawThreeGeo(json, radius, shape, materalOptions, container) {
       }
 
       drawLine(x_values, y_values, z_values, materalOptions);
-    } else if (json_geom[geom_num].type == 'Polygon') {
+    } else if (json_geom[geom_num].type === 'Polygon') {
       for (var segment_num = 0; segment_num < json_geom[geom_num].coordinates.length; segment_num++) {
         coordinate_array = createCoordinateArray(json_geom[geom_num].coordinates[segment_num]);
 
@@ -374,7 +375,7 @@ function drawThreeGeo(json, radius, shape, materalOptions, container) {
 
         drawLine(x_values, y_values, z_values, materalOptions);
       }
-    } else if (json_geom[geom_num].type == 'MultiLineString') {
+    } else if (json_geom[geom_num].type === 'MultiLineString') {
       for (var segment_num = 0; segment_num < json_geom[geom_num].coordinates.length; segment_num++) {
         coordinate_array = createCoordinateArray(json_geom[geom_num].coordinates[segment_num]);
 
@@ -384,7 +385,7 @@ function drawThreeGeo(json, radius, shape, materalOptions, container) {
 
         drawLine(x_values, y_values, z_values, materalOptions);
       }
-    } else if (json_geom[geom_num].type == 'MultiPolygon') {
+    } else if (json_geom[geom_num].type === 'MultiPolygon') {
       for (var polygon_num = 0; polygon_num < json_geom[geom_num].coordinates.length; polygon_num++) {
         for (var segment_num = 0; segment_num < json_geom[geom_num].coordinates[polygon_num].length; segment_num++) {
           coordinate_array = createCoordinateArray(json_geom[geom_num].coordinates[polygon_num][segment_num]);
@@ -404,13 +405,13 @@ function drawThreeGeo(json, radius, shape, materalOptions, container) {
   function createGeometryArray(json) {
     var geometry_array = [];
 
-    if (json.type == 'Feature') {
+    if (json.type === 'Feature') {
       geometry_array.push(json.geometry);
-    } else if (json.type == 'FeatureCollection') {
+    } else if (json.type === 'FeatureCollection') {
       for (var feature_num = 0; feature_num < json.features.length; feature_num++) {
         geometry_array.push(json.features[feature_num].geometry);
       }
-    } else if (json.type == 'GeometryCollection') {
+    } else if (json.type === 'GeometryCollection') {
       for (var geom_num = 0; geom_num < json.geometries.length; geom_num++) {
         geometry_array.push(json.geometries[geom_num]);
       }
@@ -425,9 +426,9 @@ function drawThreeGeo(json, radius, shape, materalOptions, container) {
   function getConversionFunctionName(shape) {
     var conversionFunctionName;
 
-    if (shape == 'sphere') {
+    if (shape === 'sphere') {
       conversionFunctionName = convertToSphereCoords;
-    } else if (shape == 'plane') {
+    } else if (shape === 'plane') {
       conversionFunctionName = convertToPlaneCoords;
     } else {
       throw new Error('The shape that you specified is not valid.');
