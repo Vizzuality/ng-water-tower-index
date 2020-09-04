@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@loadable/component": "^5.10.2",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "query-string": "^6.8.2",
     "react": "^16.9.0",
     "react-app-rewired": "^2.1.3",
